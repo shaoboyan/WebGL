@@ -230,8 +230,10 @@ window.Renderer = (function () {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     gl.drawElements(gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0);
-
-    ext.releaseVideoImageWEBGL(ext.TEXTURE_VIDEO_IMAGE_WEBGL);
+    
+    if (using_WEBGL_video_texture) {
+      ext.releaseVideoImageWEBGL(ext.TEXTURE_VIDEO_IMAGE_WEBGL);
+    }
   };
 
   return Renderer;

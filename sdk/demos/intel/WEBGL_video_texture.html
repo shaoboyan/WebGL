@@ -50,7 +50,7 @@
         width: 100%;
       }
     </style>
-
+    <script src="http://mrdoob.github.io/stats.js/build/stats.min.js"></script>
     <script src="js/renderer.js"></script>
   </head>
   <body>
@@ -73,6 +73,10 @@
       if(urlParams.get('disable_WEBGL_video_texture')) {
         enable_WEBGL_video_texture = false;
       }
+
+      const stats = new Stats();
+      stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
+      document.body.appendChild(stats.dom);
 
       var textNode = undefined;
       if (enable_WEBGL_video_texture) {
@@ -111,8 +115,10 @@
 
       function onAnimationFrame (t) {
         window.requestAnimationFrame(onAnimationFrame);
+        stats.begin();
         gl.viewport(0, 0, webglCanvas.width, webglCanvas.height);
         renderer.render();
+        stats.end();
       }
     })();
     </script>
